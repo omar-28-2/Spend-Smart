@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "Get a Quote";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SpendSmart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/SpendSmart.styles.css" asp-append-version="true" />
+    <style>
+        .quote-message {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            transition: opacity 0.5s ease;
+        }
+
+        .contact-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            background-color: #e9ecef;
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .contact-item a:hover {
+            color: #0056b3;
+        }
+
+        .contact-item.email {
+            background-color: #d1ecf1;
+            border-left: 5px solid #0c5460;
+        }
+
+        .contact-item.call {
+            background-color: #d4edda;
+            border-left: 5px solid #155724;
+        }
+
+        .contact-item.address {
+            background-color: #fff3cd;
+            border-left: 5px solid #856404;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Include your navbar here -->
+    </header>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Drop Us A Message For Any Service</h2>
+
+        <form method="post" action="@Url.Action("SubmitQuote", "Home")">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="Name" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="phone">Your Phone</label>
+                    <input type="tel" id="phone" name="Phone" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="Email" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="company">Your Company</label>
+                    <input type="text" id="company" name="Company" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="service">Service</label>
+                    <select id="service" name="Service" class="form-control" required>
+                        <option value="">Select a Service</option>
+                        <option value="Consulting">Consulting</option>
+                        <option value="Support">Support</option>
+                        <option value="Development">Development</option>
+                        <!-- Add other services as needed -->
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="howToKnow">How to Know Us</label>
+                    <select id="howToKnow" name="HowToKnow" class="form-control">
+                        <option value="">Select an Option</option>
+                        <option value="Referral">Referral</option>
+                        <option value="Online Search">Online Search</option>
+                        <option value="Social Media">Social Media</option>
+                        <!-- Add other options as needed -->
+                    </select>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="quoteMessage" class="quote-message"></div>
+
+        <hr class="my-4" />
+
+        <div class="contact-section">
+            <h3>Contact Us</h3>
+            <div class="contact-item email">
+                <strong>Email Us:</strong>
+                <a href="mailto:raya_info@rayalogistics.com.eg">Omarelhosany3@gmail.com</a>
+            </div>
+            <div class="contact-item call">
+                <strong>Call Us:</strong>
+                Tel 01098730722
+            </div>
+            <div class="contact-item address">
+                <strong>Address:</strong>
+                El Sheikh Zayed, Giza Governorate, Egypt
+            </div>
+        </div> 
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <!-- Include your footer here -->
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        const quotes = [
+            "Spending wisely is the key to financial freedom.",
+            "Budgeting is not just about saving money but about spending smartly.",
+            "The best way to predict your future is to create it through smart spending.",
+            "It’s not about how much you earn, but how wisely you spend it.",
+            "A penny saved is a penny earned, but a dollar wisely spent is a dollar invested.",
+            "Smart spending is the first step towards financial independence.",
+            "The secret to wealth is not just earning but smart spending.",
+            "Invest in experiences, not things. Spend smartly.",
+            "Spend money on things that make you richer, not poorer.",
+            "Financial freedom begins with smart spending habits.",
+            "Good spending habits are a cornerstone of financial success.",
+            "Spend less, save more, and invest wisely.",
+            "Smart spending is the path to financial security.",
+            "Be mindful of every dollar you spend; it’s the gateway to your future.",
+            "The key to wealth is not just earning but smart spending.",
+            "Financial peace of mind starts with smart spending decisions.",
+            "Spend money on things that grow in value, not on those that depreciate.",
+            "Every dollar saved through smart spending is an investment in your future.",
+            "Smart spending habits lead to a financially secure future.",
+            "Choose to spend smartly and watch your financial health improve.",
+            "To achieve financial stability, focus on smart spending and saving.",
+            "Your financial future depends on how wisely you spend your money.",
+            "Smart spending today lays the foundation for financial success tomorrow.",
+            "Invest in experiences and opportunities rather than things.",
+            "Spend with intention and purpose to build financial security.",
+            "Smart spending is the cornerstone of a prosperous financial future.",
+            "Plan your spending to align with your long-term financial goals."
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const quoteMessage = document.getElementById("quoteMessage");
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteMessage.textContent = quotes[randomIndex];
+            quoteMessage.style.display = "block";
+        });
+    </script>
+</body>
+</html>

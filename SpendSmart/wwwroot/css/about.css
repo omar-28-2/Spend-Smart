@@ -1,0 +1,71 @@
+﻿/* General styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Container to align circles */
+.circle-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+/* Circle styles */
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+    .circle:hover {
+        background-color: #0056b3;
+        transform: scale(1.1);
+    }
+
+/* Pop-up styles */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    background-color: white;
+    border: 2px solid #007bff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    display: none; /* Hidden by default */
+}
+
+.popup-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.popup-content {
+    font-size: 1em;
+}
+
+.popup-close {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+    .popup-close:hover {
+        background-color: #0056b3;
+    }

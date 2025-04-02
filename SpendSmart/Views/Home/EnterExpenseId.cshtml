@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Enter Expense ID";
+}
+
+<h2>Enter Expense ID</h2>
+
+<form asp-action="CheckExpenseId" method="post" class="form-inline">
+    <div class="form-group">
+        <label for="expenseId" class="control-label">Expense ID:</label>
+        <input type="number" name="expenseId" class="form-control ml-2" required />
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary ml-2" />
+</form>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        @TempData["ErrorMessage"]
+    </div>
+}

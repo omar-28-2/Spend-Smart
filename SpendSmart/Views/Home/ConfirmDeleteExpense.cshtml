@@ -1,0 +1,27 @@
+﻿@model SpendSmart.Models.Expense
+
+@{
+    ViewData["Title"] = "Confirm Deletion";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null)
+{
+    <p>Are you sure you want to delete the following expense?</p>
+    <ul>
+        <li><strong>Description:</strong> @Model.description</li>
+        <li><strong>Value:</strong> @Model.value</li>
+        <li><strong>Date:</strong> @Model.DateOfAction.ToShortDateString()</li>
+    </ul>
+    <form asp-action="DeleteExpense" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("DeleteExpenseInput")" class="btn btn-secondary">Cancel</a>
+    </form>
+}
+else
+{
+    <p>Expense not found.</p>
+    <a href="@Url.Action("DeleteExpenseInput")" class="btn btn-primary">Try Again</a>
+}

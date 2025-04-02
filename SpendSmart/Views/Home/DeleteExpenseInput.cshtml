@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Delete Expense";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="ConfirmDeleteExpense" method="post">
+    <div class="form-group">
+        <label for="id">Enter Expense ID:</label>
+        <input type="number" class="form-control" id="id" name="id" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

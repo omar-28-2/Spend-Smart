@@ -1,0 +1,80 @@
+﻿@model List<SpendSmart.Models.Expense>
+
+@{
+    ViewData["Title"] = "Expenses";
+    var currentPage = ViewBag.CurrentPage;
+    var totalPages = ViewBag.TotalPages;
+    var searchTerm = ViewBag.SearchTerm;
+    var startDate = ViewBag.StartDate;
+    var endDate = ViewBag.EndDate;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Expenses</h1>
+    <br />
+    <hr />
+    <h3>Total Expenses $@ViewBag.TotalExpenses</h3>
+    <br />
+</div>
+
+<!-- Date Filter Form -->
+<form asp-action="Expenses" method="get">
+    <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="startDate" class="form-control" value="@startDate?.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="endDate" class="form-control" value="@endDate?.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="searchTerm">Search</label>
+        <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Search by value or ID" value="@searchTerm" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-4">Filter</button>
+</form>
+
+<!-- Expenses Table -->
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Value ($$)</th>
+            <th>Description</th>
+            <th>Date of Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var expense in Model)
+        {
+            <tr>
+                <td>@expense.Id</td>
+                <td>@expense.value</td>
+                <td>@expense.description</td>
+                <td>@expense.DateOfAction.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Expenses" asp-route-page="@(currentPage - 1)" asp-route-searchTerm="@searchTerm" asp-route-startDate="@startDate?.ToString("yyyy-MM-dd")" asp-route-endDate="@endDate?.ToString("yyyy-MM-dd")" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" asp-action="Expenses" asp-route-page="@i" asp-route-searchTerm="@searchTerm" asp-route-startDate="@startDate?.ToString("yyyy-MM-dd")" asp-route-endDate="@endDate?.ToString("yyyy-MM-dd")">@i</a>
+            </li>
+        }
+        <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+            <a class="page-link" asp-action="Expenses" asp-route-page="@(currentPage + 1)" asp-route-searchTerm="@searchTerm" asp-route-startDate="@startDate?.ToString("yyyy-MM-dd")" asp-route-endDate="@endDate?.ToString("yyyy-MM-dd")" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
